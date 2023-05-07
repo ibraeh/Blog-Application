@@ -1,0 +1,55 @@
+{% extends "blog/base.html" %}
+{% load blog_tags %}
+{% load static %}
+{% load crispy_forms_tags %} 
+
+{% block title %}My Blog List{% endblock %}
+
+{% block content %}
+  <!-- <div class="container"> -->
+    <!-- <div class="row"> -->
+      <!-- <div class="col-md-8"> -->
+        <h1 class="my-4 ">Blog List</h1>
+	        {% if tag %}
+	        <h2>Posts tagged with "{{ tag.name }}"</h2>
+	        {% endif %}
+
+	        <p class="tags">
+		        Tags:
+			        {% for tag in post.tags.all %}
+				        <a href="{% url 'blog:post_list_by_tag' tag.slug %}">
+				        	{{ tag.name }}
+				        </a>
+				        {% if not forloop.last %}, {% endif %}
+			        {% endfor %}
+	        </p>
+
+        {% for post in posts %}
+          <div class="card mb-4 border-0 shadow-lg rounded-3">
+            <img class="card-img-top ms-1 mt-1 rounded-circle" src="{% if post.image %}{{ post.image.url }}{% else %}{% static 'img/post-bg.jpg' %}{% endif %}" style="width: 20px; height: 20px;" alt="Post image">
+            <div class="card-body">
+              <h2 class="card-title">{{ post.title }}</h2>
+              <p class="tags"><strong>Tags:</strong>  {{ post.tags.all|join:", " }}</p>
+              <!-- <p class="card-text">{{ post.body|truncatewords:30|linebreaks }}</p> -->
+              <p class="card-text">{{ post.body|markdown|truncatewords_html:30 }}</p>
+              <a href="{{ post.get_absolute_url }}" class="btn btn-primary">Read More &rarr;</a>
+            </div>
+            <div class="card-footer text-muted">
+              Posted on {{ post.publish }} by {{ post.author }}
+            </div>
+          </div>
+        {% endfor %}
+        {% include "blog/pagination.html" with page=posts %}
+        <!-- {% include "blog/pagination.html" with page=page_obj %} -->
+      <!-- </div> -->
+		     <!--  <div class="col-md-4">
+		        <div class="card my-4">
+		          <h5 class="card-header">About Me</h5>
+		          <div class="card-body">
+		            <p class="card-text">This is my blog.</p>
+		          </div>
+		        </div>
+		      </div> -->
+    <!-- </div> -->
+  <!-- </div> -->
+{% endblock content %}
