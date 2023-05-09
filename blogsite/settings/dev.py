@@ -1,7 +1,5 @@
 from .base import *
 
-# SECURITY WARNING: don't run with debug turned on in production!
-# DEBUG = True
 
 ALLOWED_HOSTS = []
 
@@ -36,14 +34,4 @@ EMAIL_HOST_PASSWORD= email["EMAIL_HOST_PASSWORD"]
 EMAIL_USE_TLS= email["EMAIL_USE_SSL"]
 
 
-# EMAIL_BACKEND='django.core.mail.backends.smtp.EmailBackend'
-# EMAIL_HOST='smtp.gmail.com'
-# EMAIL_PORT=587
-# EMAIL_HOST_USER='bigibraeh@gmail.com'
-# EMAIL_HOST_PASSWORD= 'whteyunvthmbzsvc'
-# EMAIL_USE_TLS=True
 
-# url = 'smtp://user@domain.com:pass@smtp.example.com:465/?ssl=True'
-# url = dj_email_url.parse(url)
-# for u,v in url.items():
-# 	print (u,":", v)

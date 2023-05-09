@@ -14,6 +14,7 @@ from pathlib import Path
 from environs import Env
 import dj_database_url
 import dj_email_url
+# import django_cache_url
 
 env=Env()
 env.read_env()
@@ -45,7 +46,7 @@ INSTALLED_APPS = [
     'django.contrib.sitemaps',
 ]
 
-# apps
+# My apps
 INSTALLED_APPS +=[
     'blog',
 ]

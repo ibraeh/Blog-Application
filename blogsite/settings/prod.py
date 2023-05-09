@@ -17,15 +17,20 @@ DATABASES = {"default": env.dj_db_url("POSTGRES_URL")}
 
 
 
-# Gmail or google configuration
-EMAIL_BACKEND='django.core.mail.backends.smtp.EmailBackend'
-EMAIL_HOST='smtp.gmail.com'
-EMAIL_PORT=587
-EMAIL_HOST_USER='bigibraeh@gmail.com'
-EMAIL_HOST_PASSWORD= 'whteyunvthmbzsvc'
-EMAIL_USE_TLS=True
+# Gmail or email configuration
+# email = dj_email_url.config()
+email = env.dj_email_url("EMAIL_URL", default="smtp://")
+
+EMAIL_BACKEND= email['EMAIL_BACKEND']
+EMAIL_HOST= email["EMAIL_HOST"]
+EMAIL_PORT= email["EMAIL_PORT"]
+EMAIL_HOST_USER= email["EMAIL_HOST_USER"]
+EMAIL_HOST_PASSWORD= email["EMAIL_HOST_PASSWORD"]
+EMAIL_USE_TLS= email["EMAIL_USE_SSL"]
 
 
 ADMINS = (
 ('Antonio M', 'email@mydomain.com'),
 )
+
+# CACHES = {"default": env.dj_cache_url("CACHE_URL")}
